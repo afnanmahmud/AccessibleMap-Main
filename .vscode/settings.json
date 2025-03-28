@@ -1,0 +1,15 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "10.96.32.190",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "CapstoneMap",
+            "database": "CapstoneMap",
+            "username": "postgres",
+            "connectionTimeout": 30
+        }
+    ]
+}
