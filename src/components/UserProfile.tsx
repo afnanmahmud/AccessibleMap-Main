@@ -1,12 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-
-// Used simple icon components to avoid dependencies
-const BackIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-    <path d="M3.828 7H16v2H3.828l5.364 5.364-1.414 1.414L0 8 7.778 0.222l1.414 1.414L3.828 7z" />
-  </svg>
-);
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 // MenuIcon
 const MenuIcon = () => (
@@ -54,10 +47,24 @@ const UserProfile: React.FC = () => {
   const [editPassword, setEditPassword] = useState(false);
   const [highContrastMode, setHighContrastMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
+  const navigate = useNavigate();
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
+  };
+
+  // Handle Back to Map navigation
+  const handleBackToMap = () => {
+    navigate('/map');
+  };
+
+  // Handle Sign Out with confirmation
+  const handleSignOut = () => {
+    const confirmSignOut = window.confirm("Are you sure you want to sign out?");
+    if (confirmSignOut) {
+      navigate('/map');
+    }
   };
 
   const normalColors = {
@@ -84,7 +91,7 @@ const UserProfile: React.FC = () => {
     disabledText: '#ffffff',
   };
 
-  // Style properties based for high contrast mode
+  // Style properties for high contrast mode
   const getStylesForMode = (isHighContrast: boolean) => {
     if (isHighContrast) {
       return {
@@ -150,9 +157,9 @@ const UserProfile: React.FC = () => {
     backButton: {
       backgroundColor: '#ffffff',
       color: '#000000',
-      padding: '0.5rem 1rem',
+      padding: '8px 16px',
       borderRadius: '4px',
-      border: '1px solid #000000',
+      border: '1px solid #ccc',
       cursor: 'pointer',
       display: 'flex',
       alignItems: 'center',
@@ -272,7 +279,7 @@ const UserProfile: React.FC = () => {
     },
     sectionColumn: {
       flex: 1,
-      maxWidth: '37.5%',
+      maxWidth: '29%',
     },
     sectionTitle: {
       fontWeight: 600,
@@ -336,8 +343,10 @@ const UserProfile: React.FC = () => {
               background: 'white',
               cursor: 'pointer',
             }}
+            onClick={handleBackToMap}
           >
-            <span style={{ marginRight: '8px' }}>◀</span> Back to Map
+            <span style={{ marginRight: '8px' }}>◀</span>
+            Back to Map
           </button>
         </div>
         <div style={styles.iconsContainer} onClick={toggleDropdown}>
@@ -358,9 +367,9 @@ const UserProfile: React.FC = () => {
                 <HelpIcon />
                 Help
               </Link>
-              <Link
-                to="/signout"
+              <div
                 style={styles.dropdownItem}
+                onClick={handleSignOut}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.backgroundColor =
                     styles.dropdownItemHover.backgroundColor)
@@ -371,7 +380,7 @@ const UserProfile: React.FC = () => {
               >
                 <SignOutIcon />
                 Sign Out
-              </Link>
+              </div>
             </div>
           )}
         </div>
