@@ -6,7 +6,7 @@ import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
 // import Preferences from './components/Preferences'; // Placeholder component
 // import Help from './components/Help'; // Placeholder component
-import './App.css';
+
 
 const App: React.FC = () => {
   return (

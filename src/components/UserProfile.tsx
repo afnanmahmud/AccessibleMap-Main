@@ -67,30 +67,6 @@ const UserProfile: React.FC = () => {
     }
   };
 
-  const normalColors = {
-    background: '#ffffff',
-    text: '#000000',
-    button: '#f0f0f0',
-    buttonText: '#000000',
-    iconBackground: '#ffcc33',
-    iconColor: '#333333',
-    inputBorder: '#cccccc',
-    inputText: '#000000',
-    disabledText: '#000000',
-  };
-
-  const highContrastColors = {
-    background: '#000000',
-    text: '#ffffff',
-    button: '#ffff00',
-    buttonText: '#000000',
-    iconBackground: '#ffcc33',
-    iconColor: '#333333',
-    inputBorder: '#ffffff',
-    inputText: '#ffffff',
-    disabledText: '#ffffff',
-  };
-
   // Style properties for high contrast mode
   const getStylesForMode = (isHighContrast: boolean) => {
     if (isHighContrast) {
