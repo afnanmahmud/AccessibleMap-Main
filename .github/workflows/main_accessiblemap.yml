@@ -55,4 +55,4 @@ jobs:
           app-name: 'accessiblemap'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EFAAB9751BF348F3BDEBAB936CD6FE5A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3DA38C7FF8A04996A214F49385593ABB }}
