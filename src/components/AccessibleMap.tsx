@@ -400,7 +400,8 @@ const AccessibleMap: React.FC<AccessibleMapProps> = ({ className }) => {
               aria-label="Interactive accessibility map"
             />
             <div className="map-controls">
-              <button onClick={toggleViewMode} className="map-toggle-button">
+              <button onClick={toggleViewMode} className="map-toggle-button" 
+                aria-label={'${viewMode} view. Switch map view'>
                 {viewMode === 'standard' ? 'Satellite' : 'Standard'}
               </button>
             </div>
