@@ -1,0 +1,29 @@
+function CalculateStepsFromMeters(distanceMeters, heightFeet, heightInches) {
+  const totalHeightInInches = (heightFeet * 12) + heightInches;
+  const strideLengthInInches = totalHeightInInches * 0.413;
+  const distanceInInches = distanceMeters / 0.0254; // meters to inches
+  const estimatedSteps = distanceInInches / strideLengthInInches;
+
+  return Math.round(estimatedSteps);
+}
+
+function CalculateCaloriesFromMeters(heightFeet, heightInches, weightLbs, distanceMeters) {
+  const totalHeightInInches = (heightFeet * 12) + heightInches;
+  const heightMeters = totalHeightInInches * 0.0254;
+  const weightKg = weightLbs * 0.453592;
+
+  // Estimate walking speed in meters/second based on height
+  const walkingSpeedMps = 1.3 * Math.sqrt(heightMeters) * 0.44704; // convert mph to m/s
+
+  // Estimate time spent walking in minutes
+  const timeMinutes = (distanceMeters / walkingSpeedMps) / 60;
+
+  // MET value for moderate walking
+  const MET = 3.8;
+
+  // Calculate calories burned
+  const caloriesPerMinute = (MET * 3.5 * weightKg) / 200;
+  const totalCalories = caloriesPerMinute * timeMinutes;
+
+  return Math.round(totalCalories);
+}
