@@ -26,6 +26,7 @@ const MapSearch: React.FC<MapSearchProps> = ({ onStartChange, onEndChange, onSub
   const dropdownRef = useRef<HTMLDivElement>(null);
   const startInputRef = useRef<HTMLDivElement>(null);
   const endInputRef = useRef<HTMLDivElement>(null);
+  const isMobile = window.outerWidth <= 475;
 
   // Toggle dropdown visibility for menu button
   const toggleDropdown = () => {
@@ -86,6 +87,8 @@ const MapSearch: React.FC<MapSearchProps> = ({ onStartChange, onEndChange, onSub
 
   // Close dropdowns when clicking outside
   useEffect(() => {
+    console.log("Window Size")
+    console.log(window.outerWidth)
     const handleClickOutside = (event: MouseEvent) => {
       // Close menu dropdown
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -132,13 +135,16 @@ const MapSearch: React.FC<MapSearchProps> = ({ onStartChange, onEndChange, onSub
             </div>
           )}
         </div>
-        <div className="dots-icon">
-          <span className="dot blue-dot"></span>
-          <span className="dot gray-dot"></span>
-          <span className="dot gray-dot"></span>
-          <span className="dot gray-dot"></span>
-          <span className="dot red-dot"></span>
-        </div>
+        {
+          !isMobile &&
+          <div className="dots-icon">
+            <span className="dot blue-dot"></span>
+            <span className="dot gray-dot"></span>
+            <span className="dot gray-dot"></span>
+            <span className="dot gray-dot"></span>
+            <span className="dot red-dot"></span>
+          </div>
+        }
         <div className="input-container" ref={endInputRef}>
           <input
             type="text"
@@ -162,24 +168,70 @@ const MapSearch: React.FC<MapSearchProps> = ({ onStartChange, onEndChange, onSub
           )}
         </div>
       </div>
-      <div className="button-group">
-        <button onClick={onSubmit} className="map-search-button">
-          Start
-        </button>
-        <button className="bookmark-button">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#FFC107"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-          </svg>
-        </button>
+      {
+        !isMobile &&
+        <div className="button-group">
+          <button onClick={onSubmit} className="map-search-button">
+            Start
+          </button>
+          <button className="bookmark-button">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#FFC107"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div className="menu-button-container" ref={dropdownRef}>
+            <button className="menu-button" onClick={toggleDropdown}>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#000000"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            {isDropdownOpen && (
+              <div className="dropdown-menu">
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleNavigation('/profile')}
+                >
+                  Preferences
+                </button>
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleNavigation('/help')}
+                >
+                  Help
+                </button>
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleNavigation('/login')}
+                >
+                  Sign in
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      }
+      {
+        isMobile &&
         <div className="menu-button-container" ref={dropdownRef}>
           <button className="menu-button" onClick={toggleDropdown}>
             <svg
@@ -220,7 +272,7 @@ const MapSearch: React.FC<MapSearchProps> = ({ onStartChange, onEndChange, onSub
             </div>
           )}
         </div>
-      </div>
+      }
     </div>
   );
 };
